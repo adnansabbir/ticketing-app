@@ -1,0 +1,20 @@
+apiVersion: skaffold/v2beta13
+kind: Config
+metadata:
+  name: ticketing
+build:
+  local:
+    push: false
+  artifacts:
+  - image: adnansabbir/auth
+    context: auth
+    docker:
+      dockerfile: Dockerfile
+    sync:
+      manual:
+        - src: "src/**/*.ts"
+          dest: .
+deploy:
+  kubectl:
+    manifests:
+    - ./infra/k8s/*
