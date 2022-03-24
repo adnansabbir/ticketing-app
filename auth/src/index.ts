@@ -12,9 +12,16 @@ import { NotFoundError } from "@errors/not-found-error"
 import cookieSession from "cookie-session"
 
 const app = express()
-app.use(json())
-// app.use(cookieSession)
 
+// ------------------------------------------------> Config middlewares
+app.use(json())
+app.set("trust proxy", true)
+app.use(cookieSession({
+  name: "session",
+  keys: ["key1", "key2"]
+}))
+
+// ------------------------------------------------> Routes
 app.use(currentUserRouter)
 app.use(signinRouter)
 app.use(signoutRouter)
@@ -23,8 +30,11 @@ app.use(signupRouter)
 app.all("*", async () => {
   throw new NotFoundError()
 })
+
+// ------------------------------------------------> Error handler middleware
 app.use(errorHandler)
 
+// ------------------------------------------------> Initializer
 const start = async () => {
   try {
     await mongoose.connect("mongodb://auth-mongo-srv:27017/auth")

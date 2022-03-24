@@ -1,8 +1,9 @@
 import express, { Request, Response } from "express"
 import { validationResult } from "express-validator"
-import { RequestValidationError } from "../errors/request-validation-error"
+import jwt from "jsonwebtoken"
+import { RequestValidationError } from "@errors/request-validation-error"
 import { User } from "@models/user"
-import { BadRequestError } from "../errors/bad-request-error"
+import { BadRequestError } from "@errors/bad-request-error"
 import { signUpRequestValidator } from "@request-validators/signup-route-validator"
 
 const router = express.Router()
@@ -22,6 +23,15 @@ router.post("/api/users/signup", signUpRequestValidator, async (req: Request, re
 
   const user = User.build({ email, password })
   await user.save()
+
+  const userJwt = jwt.sign({
+    id: user.id,
+    email: user.email
+  }, "abcd")
+
+  req.session = {
+    jwt: userJwt
+  }
 
   res.status(201).send(user)
 })
