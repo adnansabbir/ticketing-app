@@ -1,0 +1,29 @@
+{
+  "name": "ticketing",
+  "version": "1.0.0",
+  "description": "The app is a ticket selling platform for users who want to sell their tickets they don't need anymore",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adnansabbir/ticketing-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adnansabbir/ticketing-app/issues"
+  },
+  "homepage": "https://github.com/adnansabbir/ticketing-app#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.16.0",
+    "@typescript-eslint/parser": "^5.16.0",
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0",
+    "tsconfig-paths": "^3.14.1"
+  }
+}
