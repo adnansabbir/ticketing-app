@@ -36,6 +36,10 @@ app.use(errorHandler)
 
 // ------------------------------------------------> Initializer
 const start = async () => {
+  if (!process.env.JWT_KEY) {
+    throw new Error("JWT_KEY must be added to env")
+  }
+
   try {
     await mongoose.connect("mongodb://auth-mongo-srv:27017/auth")
     console.log("DB connection success")
