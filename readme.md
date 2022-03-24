@@ -29,3 +29,17 @@ The scaffold config yaml to automatically setup the project on development.
 - Microservice
 - React
 - NextJs
+
+## Setup
+1. Install docker and kubernetes
+2. Install skaffold --> [Skaffold setup step](https://skaffold.dev/docs/install/)
+3. Setup kubernetes secret by typing on terminal
+   1. JWT_KEY
+      ```bash
+          k create secret generic jwt-secret --from-literal=JWT_KEY=[YOUR_SECRET_KEY]
+          // example : k create secret generic jwt-secret --from-literal=JWT_KEY=sadf56sdf56dsf7
+       ```
+4. Form `ticketing` directory Run 
+    ```bash
+       skaffold dev
+    ```
