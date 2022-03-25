@@ -24,13 +24,8 @@ router.post("/api/users/signup", signUpRequestValidator, async (req: Request, re
   const user = User.build({ email, password })
   await user.save()
 
-  const userJwt = jwt.sign({
-    id: user.id,
-    email: user.email
-  }, process.env.JWT_KEY!)
-
   req.session = {
-    jwt: userJwt
+    jwt: jwt.sign(user.toJSON(), process.env.JWT_KEY!)
   }
 
   res.status(201).send(user)
